@@ -35,6 +35,14 @@
     background: #282828;
     display: inline-block;
 }
+#inputSearch{
+    position: relative;
+    width: 1000px;
+    background-color: #282828;
+    color: #5a5a5a;
+    border: 0;
+    border-radius: 3px;
+}
 #button-search{
     position: relative;
     text-decoration: none;
@@ -59,10 +67,10 @@
     display: flex;
     width: 95%;
     left: 0;
-    top: 0;
-   
+    top: 0;  
 }
 .filter p{
+    position: relative;
     color: #5a5a5a;
     padding: 10px;
     font-weight: bold;
@@ -82,22 +90,7 @@
     border: 0;
     margin-top: -10px;
 }
-#quality{
-    flex-grow: 1;
-}
-#genre{
-    flex-grow: 1;
-}
-#rating{
-    flex-grow: 1;
-}
-#year{
-    flex-grow: 1;
-}
-#language{
-    flex-grow: 1;
-}
-#orderby{
+.section{
     flex-grow: 1;
 }
 .movies-baners{

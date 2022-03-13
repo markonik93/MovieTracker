@@ -2,11 +2,11 @@
     <div class="center-search">
       <div id="parag-search">Search Term:</div>
       <div class="search">
-        <input id="search" autocomplete="off" type="search" placeholder="Search for movie...">
-        <a href="https://yts.mx/browse-movies"><button id="button-search">Search</button></a>
+        <input id="inputSearch" type="text" name="inputSearch" placeholder="Search for movie..." [(ngModel)]="inputSearch">
+        <button type="button" id="button-search" (click)="ngOnButtonClick()">Search</button>
       </div>
       <div class="filter">
-        <div id="quality">
+        <div class="section">
           <p>Quality:</p>
           <select name="quality">
             <option value="all">All</option>
@@ -16,10 +16,10 @@
             <option value="3D">3D</option>
           </select>
         </div>
-        <div id="genre">
+        <div class="section" name="genre" >
           <p>Genre:</p>
-          <select name="genre">
-            <option value="all">All</option>
+          <select name="genre" id="selectGenre" [(ngModel)]="genre">
+            <option value="All">All</option>
             <option value="action">Action</option>
             <option value="adventure">Adventure</option>
             <option value="animation">Animation</option>
@@ -48,7 +48,7 @@
             <option value="western">Western</option>
             </select>
         </div>
-        <div id="rating">
+        <div class="section">
           <p>Rating:</p>
           <select name="rating">
             <option value="0">All</option>
@@ -63,9 +63,9 @@
             <option value="1">1+</option>
             </select>
         </div>
-        <div id="year">
+        <div class="section" name="year" >
           <p>Year:</p>
-          <select name="year">
+          <select name="year" id="selectYear" [(ngModel)]="year">
             <option value="0">All</option>
             <option value="2022">2022</option>
             <option value="2021">2021</option>
@@ -81,7 +81,7 @@
             <option value="1900-1949">1900-1949</option>
             </select>
         </div>
-        <div id="language">
+        <div class="section">
           <p>Language:</p>
           <select name="language">
             <option value="en">English</option>
@@ -177,7 +177,7 @@
             <option value="aa">Afar</option>
             </select>
         </div>
-        <div id="orderby">
+        <div class="section">
           <p>OrderBy:</p>
           <select name="order_by">
             <option value="latest">Latest</option>
@@ -384,22 +384,3 @@
     </div>
 
   </div>
-
-  <!-- <div class="footer">
-    <div class="footer-up">
-        YTS © 2011 - 2022 - 
-        <a href="https://yts.mx/blog">Blog</a> - 
-        <a href="https://yts.mx/dmca">DMCA</a> - 
-        <a href="https://yts.mx/api">API</a> - 
-        <a href="https://yts.mx/rss-guide">RSS</a> - 
-        <a href="https://yts.mx/contact">Contact</a> - 
-        <a href="https://yts.mx/browse-movies">BrowseMovies</a> - 
-        <a href="https://yts.mx/requests">Requests</a> - 
-        <a href="https://yts.mx/login">Login</a>
-    </div>
-    <div class="footer-down">
-      By using this site you agree to and accept our 
-        <a href="https://yts.mx/terms">User Agreement</a> 
-        , which can be read <a href="https://yts.mx/terms">here</a>.
-    </div>
-  </div> -->
