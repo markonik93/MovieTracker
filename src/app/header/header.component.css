@@ -62,7 +62,7 @@
     margin-right: 0px;
     vertical-align: middle;
 }
-.nav-meni a{
+.nav-meni li a{
     text-decoration: none;
     color: #919191;
     flex-grow: 1;

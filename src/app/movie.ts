@@ -1,5 +1,6 @@
 export class Movie {
-     inputSearch: string;
-     genre: string;
-     year: number;     
+     inputSearch: string|null;
+     type: string;
+     year: number;
+     page:number;
 }

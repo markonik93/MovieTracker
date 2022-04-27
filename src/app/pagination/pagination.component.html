@@ -1,0 +1,52 @@
+<!-- <div class="pagination">
+    <div class="item" (click)="navigateToPage(1)">First</div>
+    <div class="item" (click)="navigateToPage(index - 1)">Previous</div>
+    <div class="item" (click)="navigateToPage(index-5)">...</div>
+    <div  *ngFor="let page of pagination.pages; let i = index"
+      class="active" style="cursor: pointer;"
+      [class.item.active]="page === pagination.index"
+      (click)="navigateToPage(page)">
+      <div style="color: whitesmoke"> &nbsp;{{page}} &nbsp;</div>
+    </div>
+    <div class="item" (click)="navigateToPage(index+5)">...</div>
+    <div class="item" (click)="navigateToPage(index + 1)">Next</div>
+    <div class="item" (click)="navigateToPage(maxPages)">Last</div>
+    <div class="item" style="background-color: #5cb85c;">of {{pagination.maxPages}}</div>
+</div> -->
+
+
+<div class="pagination">
+  <div *ngIf="index>1"  class="item" (click)="navigateToPage(1)">First</div>
+  <div *ngIf="index>1" class="item" (click)="navigateToPage(index - 1)">Previous</div>
+  <div *ngIf="index>5" class="item" (click)="navigateToPage(index-5)">...</div>
+  <div  *ngFor="let page of pages; let i = index" class="active" style="cursor: pointer;"
+  [class.item.active]="page==pages[index-1]"
+  (click)="navigateToPage(page)">
+
+  <div *ngIf="page>index-6 && page<index+6" style="color: whitesmoke"> &nbsp;{{page}} &nbsp;</div>
+ 
+  </div>
+  <div *ngIf="index<pages.length-4" class="item" (click)="navigateToPage(index+5)">...</div>
+  <div *ngIf="index<pages.length" class="item" (click)="navigateToPage(index + 1)">Next</div>
+
+  <div class="item" (click)="navigateToPage(maxPages)" style="background-color: #5cb85c;">of {{maxPages}}</div>
+</div>
+
+
+
+
+<!-- <ol class="pagination">
+    <li class="item" (click)="navigateToPage(1)">First page</li>
+    <li class="item" (click)="navigateToPage(index - 1)">Previous page</li>
+    <li 
+      *ngFor="let page of pagination.pages; let i = index"
+      class="paginator-number"
+      [class.item.active]="page === pagination.index"
+      class="item"
+      (click)="navigateToPage(page)"
+    >
+    {{ page }}
+    </li>
+    <li class="item" (click)="navigateToPage(index + 1)">Next page</li>
+    <li class="item" (click)="navigateToPage(maxPages)">Last page</li>
+  </ol> -->

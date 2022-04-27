@@ -1,24 +1,45 @@
 <div class="movie-detail">
     <div class="detailsCenter">
         <div class="left">
-            <img [src]="movie.Poster" alt="poster">
-            <button id="buttonDownload">Download</button>
-            <button id="buttonWatchNow">Watch Now</button>
-            
+            <div class="poster"><img [src]="movie?.Poster" alt="poster"></div>
+            <div><button id="buttonDownload">Download</button></div>
+            <div><button id="buttonWatchNow">Watch Now</button></div>
         </div>
         <div class="center">
-            <h1>{{movie.Title}}</h1>
-            <p>Year: {{movie.Year}}</p>
-            <p>Genre: {{movie.Genre}}</p>
-            <p>Actors: {{movie.Actors}}</p>
-            <p>Runtime: {{movie.Runtime}}</p>
-            <p>Director/s: {{movie.Director}}</p>
-            <p>Plot: {{movie.Plot}}</p>
+            <h1>{{movie?.Title}}</h1>
+            <p>Year: {{movie?.Year}}</p>
+            <p>Genre: {{movie?.Genre}}</p>
+            <p>Actors: {{movie?.Actors}}</p>
+            <p>Runtime: {{movie?.Runtime}}</p>
+            <p>Director/s: {{movie?.Director}}</p>
+            <p>Plot: {{movie?.Plot}}</p>
+            <div class="inputComment">
+                <textarea type="text" name="inputComment" rows="5" cols="60" placeholder="Enter youre comment ..."
+                    style="color: white;" [(ngModel)]="inputComment"></textarea>
+                <button id="buttonPost" (click)="saveComment()">Post</button>
+            </div>
 
-        </div> 
+        </div>
         <div class="right">
-            <div>Desna kolona</div>
+            &nbsp;<div>Similar Movies</div><br>
+            <div class="similarPoster">
+                <div class="miniPoster"><img [src]="movie1?.Poster" alt="miniPoster" (click)="getMovieDetails(movie1.imdbID)"></div>
+                <div class="miniPoster"><img [src]="movie2?.Poster" alt="miniPoster" (click)="getMovieDetails(movie2.imdbID)"></div>
+            </div>
+            <div class="similarPoster">
+                <div class="miniPoster"><img [src]="movie3?.Poster" alt="miniPoster" (click)="getMovieDetails(movie3.imdbID)"></div>
+                <div class="miniPoster"><img [src]="movie4?.Poster" alt="miniPoster" (click)="getMovieDetails(movie4.imdbID)"></div>
+            </div>
 
+        </div>
+    </div>
+    <div class="comments"> 
+        <h3>Comments: </h3>
+        <div *ngFor="let comment of userCommentsFromLs">
+            <div *ngIf="id===comment.id">
+                <div class="user">{{user}}:</div>
+                <div class="comment">{{comment.comment}}</div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 import { MovieDetails } from '../movieDetails';
@@ -10,40 +10,87 @@ import { MovieDetails } from '../movieDetails';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  inputSearch: string = '';
-  type: string = '';
+  inputSearch: string = "";
+  type: string;
   year: number;
   movie_id: string;
 
-  // Title: string='';
-  // Type:string='';
-  // Year:number=0;
-  // Poster:string='';
-  // Genre: string='';
-  // Runtime: string='';
-  // Actors: string='';
-  // Director: string='';
- 
   totalMovies: number;
   moviesFoundMessage: string;
 
   movie: Movie;
   movies: any[] = [];
 
-  movieDetails:MovieDetails;
+  movieDetails: MovieDetails;
   //API_KEY:'34fb9a13';
-  constructor(private movieService: MovieService) { }
+
+  page: number = 1;
+  count: number = 0;
+  pageSize: number = 10;
+  // pageSizes:any=[5,10,20];
+
+  constructor(private movieService: MovieService) {
+  }
 
   ngOnInit(): void {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+
+    this.movie = JSON.parse(localStorage.getItem('myMovie')!);
+    this.inputSearch = this.movie.inputSearch ? this.movie.inputSearch : "";//if exist
+    this.type = this.movie.type ? this.movie.type : "";
+    this.year = this.movie.year ? this.movie.year : 0;
+    this.getMovieByInput();
+    console.log(this.movie);
+
+
+  }
+
+  ngOnDestroy() {
+    //localStorage.removeItem('lSinputSearch');
+  }
+  pageEvent(pageNumber: number): void {
+    this.page = pageNumber;
+    console.log(this.page);
+    this.movie.page = pageNumber;
+    this.getMovieByInput();
+  }
+  // onPageDataChange(event: any) {
+  //   this.page = event;
+  //   console.log(this.page);
+  //   //this.movie.page=event;
+  //   this.getMovieByInput();
+  // }
+  // onPageSizeChange(event:any): void{
+  //   this.pageSize=event.target.value;
+  //   this.page=1;
+  //   this.getMovieByInput();  
+
+  // }
+
+  removeItem() {
+    localStorage.removeItem('myMovie');
+    this.inputSearch = "";
+    this.type = "";
+    this.year = 0;
+    window.location.reload();
   }
 
   ngOnButtonClick() {
     this.movie = new Movie();
     this.movie.inputSearch = this.inputSearch;
+    //localStorage.setItem('lSinputSearch', JSON.stringify(this.movie.inputSearch));
     this.movie.type = this.type;
+    //localStorage.setItem('lStype', JSON.stringify(this.movie.type));
     this.movie.year = this.year;
-    //console.log(this.movie); 
-    //this.movieService.showMovie(this.movie);
+    //localStorage.setItem('lSyear', JSON.stringify(this.movie.year));
+    this.movie.page = this.page;
+    //localStorage.setItem('lSpage', JSON.stringify(this.movie.page));
+    localStorage.setItem('myMovie', JSON.stringify(this.movie));
   }
 
   async getMovieByInput() {
@@ -63,30 +110,58 @@ export class HomepageComponent implements OnInit {
 
     //prikazi ukupan broj pronadjenih filmova
     this.totalMovies = find.totalResults;
-    if (this.totalMovies === undefined) {
+    if (this.totalMovies <= 0) {
       this.moviesFoundMessage = " The film was not found";
     } else if (this.totalMovies == 1) {
       this.moviesFoundMessage = " YIFY Movie found";
     } else this.moviesFoundMessage = " YIFY Movies found";
-  }
-  
-  async getMovieDetails(movie_id:string){
-    // this.movieDetails=new MovieDetails();
-    // this.movieDetails.Title=this.Title;
-    // this.movieDetails.Type=this.Type;
-    // this.movieDetails.Year=this.Year;
-    // this.movieDetails.Poster=this.Poster;
-    // this.movieDetails.Genre=this.Genre;
-    // this.movieDetails.Runtime=this.Runtime;
-    // this.movieDetails.Actors=this.Actors;
-    // this.movieDetails.Director=this.Director;
 
-    const find_movie = await this.movieService.getMovieById(movie_id);
-    this.movieDetails=find_movie;
-    //console.log(find_movie);
-    console.log(this.movieDetails);
-    //slanje detalja odabranog filma drugoj Sibling komponenti
-    this.movieService.emit<MovieDetails>(this.movieDetails);
-  }  
+    //count=totalItems
+    this.count = this.totalMovies;
+    //console.log(find.Search[this.getRandomInt(1,10)]);
+    // let movie1: Movie = find.Search[this.getRandomInt(1, 10)];
+    // let movie2: Movie = find.Search[this.getRandomInt(1, 10)];
+    // let movie3: Movie = find.Search[this.getRandomInt(1, 10)];
+    // let movie4: Movie = find.Search[this.getRandomInt(1, 10)];
+    // if (movie1) {
+    //   console.log(movie1);
+    // } else {
+    //   movie1 = find.Search[this.getRandomInt(1, 10)];
+    //   console.log(movie1);
+    // }
+    // if (movie2 && movie2 != movie1) {
+    //   console.log(movie2);
+    // } else {
+    //   movie2 = find.Search[this.getRandomInt(1, 10)];
+    //   console.log(movie2);
+    // }
+    // if (movie3 && movie3 != movie1 && movie3 != movie2) {
+    //   console.log(movie3);
+    // } else {
+    //   movie3 = find.Search[this.getRandomInt(1, 10)];
+    //   console.log(movie3);
+    // }
+    // if (movie4 && movie4 != movie3 && movie4 != movie2 && movie4 != movie1) {
+    //   console.log(movie4);
+    // } else {
+    //   movie3 = find.Search[this.getRandomInt(1, 10)];
+    //   console.log(movie3);
+    // }
+
+
+  }
+
+  // getRandomInt(min: number, max: number): number {
+  //   min = Math.ceil(min);
+  //   max = Math.floor(max);
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // }
+  // getSimilarFilms(): void {
+  //   this.movie = new Movie();
+  //   this.movie.inputSearch = this.inputSearch;
+  //   this.movie.type = this.type;
+  //   this.movie.year = this.year;
+  //   this.movie.page = this.page;
+  // }
 
 }
