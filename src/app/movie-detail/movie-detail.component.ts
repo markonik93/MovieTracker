@@ -43,11 +43,11 @@ export class MovieDetailComponent implements OnInit {
       console.log(params);
       console.log(params['id']);
       this.id = params['id'];
+      this.getMovieDetails(this.id);
+      this.loadFromLs();
+      this.loadSimilarMovies();
     });
-    this.getMovieDetails(this.id);
-
-    this.loadFromLs();
-    this.loadSimilarMovies();
+   
     
 
   }
@@ -75,6 +75,9 @@ export class MovieDetailComponent implements OnInit {
       this.userCommentLs.comment = this.inputComment;
       this.userCommentLs.id = this.id;
       console.log(this.userCommentLs);
+      if(this.userCommentsFromLs==null){
+        this.userCommentsFromLs=new Array();
+      }
       this.userCommentsFromLs.push(this.userCommentLs);
       localStorage.setItem('usersComment', JSON.stringify(this.userCommentsFromLs));
       //this.userCommentsFromLs.push(this.userCommentLs);

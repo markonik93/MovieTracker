@@ -23,12 +23,12 @@
         <div class="right">
             &nbsp;<div>Similar Movies</div><br>
             <div class="similarPoster">
-                <div class="miniPoster"><img [src]="movie1?.Poster" alt="miniPoster" (click)="getMovieDetails(movie1.imdbID)"></div>
-                <div class="miniPoster"><img [src]="movie2?.Poster" alt="miniPoster" (click)="getMovieDetails(movie2.imdbID)"></div>
+                <div class="miniPoster"><a [routerLink]="['/details',movie1?.imdbID]"><img [src]="movie1?.Poster" alt="miniPoster"></a></div>
+                <div class="miniPoster"><a [routerLink]="['/details',movie2?.imdbID]"><img [src]="movie2?.Poster" alt="miniPoster"></a></div>
             </div>
             <div class="similarPoster">
-                <div class="miniPoster"><img [src]="movie3?.Poster" alt="miniPoster" (click)="getMovieDetails(movie3.imdbID)"></div>
-                <div class="miniPoster"><img [src]="movie4?.Poster" alt="miniPoster" (click)="getMovieDetails(movie4.imdbID)"></div>
+                <div class="miniPoster"><a [routerLink]="['/details',movie3?.imdbID]"><img [src]="movie3?.Poster" alt="miniPoster"></a></div>
+                <div class="miniPoster"><a [routerLink]="['/details',movie4?.imdbID]"><img [src]="movie4?.Poster" alt="miniPoster"></a></div>
             </div>
 
         </div>
